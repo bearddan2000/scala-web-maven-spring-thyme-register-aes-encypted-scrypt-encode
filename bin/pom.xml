@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+<groupId>example</groupId>
+    <artifactId>scala-spring</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <encoding>UTF-8</encoding>
+    </properties>
+  <profiles>
+        <profile>
+            <id>scala-2.12</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <java.version>1.8</java.version>
+                <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <scala.version>2.12.7</scala.version>
+                <scala.compat.version>2.12</scala.compat.version>
+            </properties>
+            <dependencies>
+	             <dependency>
+          			<groupId>org.springframework.boot</groupId>
+          			<artifactId>spring-boot-starter-web</artifactId>
+          		</dependency>
+            		<!-- Spring Security -->
+                <dependency>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-web</artifactId>
+                    <version>5.0.0.RELEASE</version>
+                </dependency>
+                <dependency>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                    <version>1.15</version>
+                </dependency>
+                 <!-- thymeleaf -->
+                 <dependency>
+                     <groupId>org.springframework.boot</groupId>
+                     <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                 </dependency>
+                 <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+                 <dependency>
+                     <groupId>org.thymeleaf.extras</groupId>
+                     <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+                     <version>3.0.4.RELEASE</version>
+                 </dependency>
+                 <dependency>
+                     <groupId>org.springframework.security</groupId>
+                     <artifactId>spring-security-web</artifactId>
+                     <version>5.0.0.RELEASE</version>
+                 </dependency>
+                 <dependency>
+                     <groupId>org.springframework.security</groupId>
+                     <artifactId>spring-security-core</artifactId>
+                     <version>5.0.0.RELEASE</version>
+                 </dependency>
+                 <dependency>
+                     <groupId>org.springframework.security</groupId>
+                     <artifactId>spring-security-config</artifactId>
+                     <version>5.0.0.RELEASE</version>
+                 </dependency>
+                 <!-- argon2 -->
+                 <dependency>
+                     <groupId>org.springframework.security</groupId>
+                     <artifactId>spring-security-crypto</artifactId>
+                     <version>5.3.2.RELEASE</version>
+                 </dependency>
+                <!-- optional, it brings userful tags to display spring security stuff -->
+            		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+            		<dependency>
+            		    <groupId>org.thymeleaf.extras</groupId>
+            		    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            		    <version>3.0.4.RELEASE</version>
+            		</dependency>
+                <dependency>
+                    <groupId>org.scala-lang</groupId>
+                    <artifactId>scala-library</artifactId>
+                    <version>${scala.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcpkix-jdk15on</artifactId>
+                    <version>1.65</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+    <build>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.4.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                  <launchers>
+                     <launcher>
+                       <id>foo</id>
+                       <mainClass>example.MyApp</mainClass>
+                     </launcher>
+                     <!-- you could define other launcher -->
+                   </launchers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
